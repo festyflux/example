@@ -1,0 +1,40 @@
+<html>
+
+    <%- include("./partials/head.ejs") %>
+
+<body>
+    <header class="head">
+        <div class="logo">
+            <img src="/images/sha.png" alt="">
+            <h1><em>k</em>krafti</h1>
+        </div>
+        <nav class="navs">
+         
+            <%- include("./partials/nav.ejs") %>
+
+    </header>
+    <div class="signin-1">
+        <h1>Welcome back!</h1>
+        <p>sign in using social network</p>
+        <div class="social">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-google"></i>
+        </div>
+        <!-- <div class="or"> -->
+            <hr>
+            <p>OR</p>
+            <hr>
+        <!-- </div> -->
+        
+        <form action="#" method="dialog">
+            <input type="email" placeholder="Email"><br>
+            <input type="password" name="password" id="" placeholder="Password"><br>
+            <input type="button" value="Sign-in">
+        </form>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+
+</body>
+
+</html>

@@ -5,6 +5,7 @@ const Customer = require('./models/customer');
 const dotenv = require('dotenv').config();
 const bcrypt = require('bcryptjs'); // To encrypt passwords
 const session = require('express-session');
+const Artisan = require('./models/artisan');
 const MemoryStore = require('memorystore')(session);
 
 //constants
@@ -22,7 +23,10 @@ mongoose.connect(dbURI, {
     useNewUrlParser: true, 
     useUnifiedTopology: true 
 }).then(result => app.listen(port, () => console.log(`Listening on port ${PORT}`)))
-  .catch(err => console.log(err))
+  .catch(err => {
+      console.log(err)
+      app.listen(port, () => console.log(`Listening on port ${PORT}`))
+    })
 
 
 
@@ -61,88 +65,99 @@ app.get('/', (req, res) => {
     res.render('about', { title: 'About Krafti' });
   });
 
-  app.get('/homepage', (req, res) => {
-    res.render('homepage', { title: 'Homepage' });
+  app.get('/contact', (req, res) => {
+    res.render('contact', { title: 'Contact Us' });
+  });
+
+  app.get('/faq', (req, res) => {
+    res.render('faq', { title: 'FAQ' });
+  });
+
+  app.get('/choose', (req, res) => {
+    res.render('choose', { title: 'User Type' });
   });
 
   app.get('/artisan-register', (req, res) => {
-    res.render('artisan-register', { title: 'Artisan Registration' });
+    res.render('artisan-register', { title: 'Artisan Registration', errors: null });
   });
 
-  app.post('artisan-register', (req, res) => {
+app.post('/artisan-registration', async (req, res) => {
     console.log(req.body);
+    const errorMessages = [] // Form Validation for required inputs
+    if (!req.body.email) {
+      errorMessages.push('Enter your email address')
+    };
+    if (!req.body.username) {
+      errorMessages.push('Kindly provide a username');
+    };
+    if (!req.body.password) {
+      errorMessages.push('Enter a password');
+    };
+    if (req.body.password !== req.body.confirmPassword) {
+      errorMessages.push('password and confirm password do not match');
+    }
+    if (errorMessages.length > 0) {
+      return res.render('example', { errors: errorMessages })
+    }
+    else {
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt); //To encrypt/hash password
+      const customer = new Customer({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          address:req.body.address,
+          username: req.body.username,
+          password: req.body.password
+      })
+      await customer.save()
+      req.session.user_id = Artisan._id;
+      res.redirect('/')
+    }
+
+  
 } );
 
-// app.post('/artisan-register', async (req, res) => {
-//     console.log(req.body);
-//     const errorMessages = [] // Form Validation for required inputs
-//     if (!req.body.email) {
-//       errorMessages.push('Enter your email address')
-//     };
-//     if (!req.body.username) {
-//       errorMessages.push('Kindly provide a username');
-//     };
-//     if (!req.body.password) {
-//       errorMessages.push('Enter a password');
-//     };
-//     if (req.body.password !== req.body.confirmPassword) {
-//       errorMessages.push('password and confirm password do not match');
-//     }
-//     if (errorMessages.length > 0) {
-//       return res.render('example', { errors: errorMessages })
-//     }
-//     else {
-//       const salt = await bcrypt.genSalt(10);
-//       req.body.password = await bcrypt.hash(req.body.password, salt); //To encrypt/hash password
-//       Customer.save({
-//           firstName: req.body.firstName,
-//           lastName: req.body.lastName,
-//           email: req.body.email,
-//           address:req.body.address,
-//           username: req.body.username,
-//           password: req.body.password
-//       })
-//     }
-
-  
-// } );
-
   app.get('/customer-register', (req, res) => {
-    res.render('customer-register', { title: 'Customer Registration' });
+    res.render('customer-register', { title: 'Customer Registration', errors: null});
   });
 
-//   app.post('/customer-register', async (req, res) => {
-//     console.log(req.body);
-//     const errorMessages = [] // Form Validation for required inputs
-//     if (!req.body.email) {
-//       errorMessages.push('Enter your email address')
-//     };
-//     if (!req.body.username) {
-//       errorMessages.push('Kindly provide a username');
-//     };
-//     if (!req.body.password) {
-//       errorMessages.push('Enter a password');
-//     };
-//     if (req.body.password !== req.body.confirmPassword) {
-//       errorMessages.push('password and confirm password do not match');
-//     }
-//     if (errorMessages.length > 0) {
-//       return res.render('example', { errors: errorMessages })
-//     }
-//     else {
-//       const salt = await bcrypt.genSalt(10);
-//       req.body.password = await bcrypt.hash(req.body.password, salt); //To encrypt/hash password
-//       
-        // const customer = new Customer(req.body)
-
-        // customer.save()
-        // .then((result) =>{
-        //     req.session.user_id = user._id,
-        //     res.redirect('/')
-        // })
+  app.post('/customer-register', async (req, res) => {
+    console.log(req.body);
+    const errorMessages = [] // Form Validation for required inputs
+    if (!req.body.email) {
+      errorMessages.push('Enter your email address')
+    };
+    if (!req.body.username) {
+      errorMessages.push('Kindly provide a username');
+    };
+    if (!req.body.password) {
+      errorMessages.push('Enter a password');
+    };
+    if (req.body.password !== req.body.confirmPassword) {
+      errorMessages.push('password and confirm password do not match');
+    }
+    if (errorMessages.length > 0) {
+      return res.render('customer-registration', { errors: errorMessages })
+    }
+    else {
+      const salt = await bcrypt.genSalt(10);
+      req.body.password = await bcrypt.hash(req.body.password, salt); //To encrypt/hash password
+      const customer = new Customer({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          address:req.body.address,
+          username: req.body.username,
+          password: req.body.password
+      })
+      await customer.save()
+      req.session.user_id = customer._id;
+      res.redirect('/')
+    }
 
   
-// } );
+} );
 
 
 // --EXAMPLE STARTS--
@@ -151,42 +166,42 @@ app.get('/', (req, res) => {
     
   });
 
-  app.post('/example', async (req, res) => {
-      console.log(req.body);
-      const errorMessages = [] // Form Validation for required inputs
-      if (!req.body.email) {
-        errorMessages.push('Enter your email address')
-      };
-      if (!req.body.username) {
-        errorMessages.push('Kindly provide a username');
-      };
-      if (!req.body.password) {
-        errorMessages.push('Enter a password');
-      };
-      if (req.body.password !== req.body.confirmPassword) {
-        errorMessages.push('password and confirm password do not match');
-      }
-      if (errorMessages.length > 0) {
-        return res.render('example', { errors: errorMessages })
-      }
-      else {
-        const salt = await bcrypt.genSalt(10);
-        req.body.password = await bcrypt.hash(req.body.password, salt); //To encrypt/hash password
-        const customer = new Customer({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            address:req.body.address,
-            username: req.body.username,
-            password: req.body.password
-        })
-        await customer.save()
-        req.session.user_id = customer._id;
-        res.redirect('/')
-      }
+//   app.post('/example', async (req, res) => {
+//       console.log(req.body);
+//       const errorMessages = [] // Form Validation for required inputs
+//       if (!req.body.email) {
+//         errorMessages.push('Enter your email address')
+//       };
+//       if (!req.body.username) {
+//         errorMessages.push('Kindly provide a username');
+//       };
+//       if (!req.body.password) {
+//         errorMessages.push('Enter a password');
+//       };
+//       if (req.body.password !== req.body.confirmPassword) {
+//         errorMessages.push('password and confirm password do not match');
+//       }
+//       if (errorMessages.length > 0) {
+//         return res.render('example', { errors: errorMessages })
+//       }
+//       else {
+//         const salt = await bcrypt.genSalt(10);
+//         req.body.password = await bcrypt.hash(req.body.password, salt); //To encrypt/hash password
+//         const customer = new Customer({
+//             firstName: req.body.firstName,
+//             lastName: req.body.lastName,
+//             email: req.body.email,
+//             address:req.body.address,
+//             username: req.body.username,
+//             password: req.body.password
+//         })
+//         await customer.save()
+//         req.session.user_id = customer._id;
+//         res.redirect('/')
+//       }
 
     
-  } );
+//   } );
 
   //--EXAMPLE ENDS--
 

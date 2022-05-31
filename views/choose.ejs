@@ -1,0 +1,40 @@
+<html>
+
+    <%- include("./partials/head.ejs") %>
+
+<body>
+    <header class="head">
+        <div class="logo">
+            <img src="/images/sha.png" alt="">
+            <h1><em>k</em>krafti</h1>
+        </div>
+       
+        <%- include("./partials/nav.ejs") %>
+
+    </header>
+    <div class="register">
+        <h1 style="text-align:center ;">Register as a Customer or an Artisan</h1>
+    </div>
+    <div style="display:flex ; border: solid 1px black; margin:5em 25em 2em 25em; height: 3em; border-radius: 1em;">  
+    <input type="checkbox" name="" id="">
+    <label for="checkbox" style="font-size: 2em ;">I am an Artisan, looking for available job</label>
+    </div>
+
+    <div style="display:flex ; border: solid 1px black; margin:5em 25em 2em 25em; height: 3em; border-radius: 1em;">  
+        <input type="checkbox" name="" style="padding: 0 0 0 5px;">
+        <label for="checkbox" style="font-size: 2em ;">I am a Customer, looking for an Artisan</label>
+        </div>
+    
+        <div style="display: flex; margin: 1em 24em;">
+            <input type="checkbox" name="checkbox" id="checkbox">
+            <label for="checkbox">Yes, I understand and agree to the Krafti Terms of Services, including the User Agreement and Privacy Policy.</label><br>
+            </div>
+        
+       <button style="align-self: center; width: 80%; height: 6em; margin:2em 12em; background-color: blue;
+       border: none; border-radius: 8px;"><a href="" style="font-size: 2em; text-decoration:none; color:white;">Join</a> </button>
+
+    <%- include("./partials/footer.ejs") %>
+
+</body>
+
+</html>

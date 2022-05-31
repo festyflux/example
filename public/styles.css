@@ -1,1 +1,332 @@
 /* .text-danger { color: red } */
+
+*,html,body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   }
+body{
+    font-family: "Poppins", sans-serif;
+}
+.head{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    /* margin: 0 2em; */
+    /*position: fixed;*/
+}
+.navs{
+    margin: 0 2em; 
+}
+.head img{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    z-index: -1;
+}
+.head h1{
+    color: blue;
+    margin: 1em 0 0 1em;
+}
+.head h1 em{
+    font-family: "allura", cursive;
+    font-size: 50px;
+    font-style: normal;
+    padding-right: 5px;
+}
+li{
+    display: inline-block;
+    margin: 10px;
+    list-style-type: none;
+    margin: 2em 0 0 2em;
+}
+.margnav #signin{
+    color: blanchedalmond;
+}
+.head .navs li a{
+    text-decoration: none;
+}
+.intro{
+    display: flex;
+    justify-content: space-between;
+    height: 90vh;
+    margin: 0 2em;
+
+}
+.intro-head{
+    font-size: 50px;
+    margin-right: 1em;
+}
+.intro-1{
+    display: block;
+    width: 45%;
+    flex-grow: 2;
+    width: 45vw;
+    margin-top: 100px;
+    
+}
+.intro-p{
+    font-size: 30px;
+    margin-right: 3em;
+}
+.intro-img{
+    background-image: url(./images/image_p1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 90%;
+    border-radius: 50px;
+    flex-grow: 1;
+    width: 50%;
+}
+.signup-button{
+    padding:1em 3em;
+    margin-top: 1em;
+    background-color: blue;
+    border-radius: 1em;
+    border-style: none;
+
+}
+.intro .intro-1 button{
+    color: white;
+    font-size: 1em;
+}
+.second{
+    display: flex;
+    flex-direction: column;
+    background-color:  #eaebfa;
+    margin: 30px 0 0 0;
+    height: 70vh;
+
+}
+.second p{
+    padding-top: 2.8em;
+    font-size: 2.3em;
+    text-align: center;
+    min-width: 100px 70vw;
+    margin: 0 1em;
+}
+.second em{
+    color: rgb(179, 179, 15);
+    font-style: normal;
+    font-size: 1.5em;
+}
+.second .app{
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+.second .app img{
+    margin: 0 1em;
+    width: 300px;
+    height: 60px;
+    border-radius: 10px;
+}
+.third{
+    display: flex;
+    height: 60vh;
+    background-color: blue;
+}
+.third p{
+    font-size: 1.8em;
+    color: white;
+    margin: 2.5em 2em;
+}
+.third #borderline{
+    border: solid white ;
+    padding-right: 1em;
+    border-width: 0 1px 0 0;
+}
+.col{
+    height: 25em;
+    width: 25em;
+    background-color:white;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 2em;
+    border: solid 1px blue;
+    display: flex;
+    margin:3em 1em;
+    flex: 33.33%;
+}
+.col .testimonial img{
+    width: 10em;
+    height: 10em;
+    border-radius: 50%;
+    margin-top: 1em;
+}
+.name{
+    text-transform: uppercase;
+    margin: 10px 0;
+    font-weight: bolder;
+}
+.stars{
+    color: #ffff00;
+    margin: 10px 0;
+}
+.testimonial p{
+    margin: 0 5px;
+}
+.row{
+    display: flex;
+}
+.testimonials{
+    display: flex;
+    background-color: #eaebfa;
+    height: 70vh;
+    justify-content: space-around;
+}
+.testimonials h1{
+    text-align: center;
+    text-transform: uppercase;
+    
+}
+.message{
+    display: flex;
+    background-color: blue;
+    height: 70vh;
+    justify-content: space-between;
+}
+.contact{
+    margin: 10em 0 0 4em;
+    color: white;
+    width: 20em;
+}
+.message-box{
+    /* display: flex; */
+    background-color: white;
+    height: 25em;
+    width: 40%;
+    margin: 3em;
+    padding: 2em;
+    border-radius: 8px;
+}
+.message-box .form1 #name, #email{
+    margin: 10px 0px;
+    
+}
+#name, #email{
+    width: 100%;
+    height: 3em;
+    border-radius: 8px;
+    border-style: solid;
+}
+textarea{
+    width: 100%;
+    border-radius: 12px;
+    margin: 10px 0 0 0;
+    border: solid 1px black;
+    font-size: 10px;
+}
+.form1 button{
+    background-color: blue;
+    padding: 0.6em 2em;
+    border-style: none;
+    border-radius: 5px;
+    margin: 2em 10em;
+}
+.form1 button a{
+    color: white;
+    font-size: 1em;
+    text-decoration: none;
+}
+.contact p{
+    margin: 1em 0;
+}
+footer{
+    display: flex;
+    background-color: black;
+    height: 40vh;
+    color: white;
+  
+}
+.navsfooter{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.one, .two, .three{
+    flex: 33.33%;
+    margin: 2em;
+}
+.one p{
+    margin-top: 9em;
+}
+.footer h1{
+    color: white;
+}
+.footer h1 em{
+    font-family: "allura", cursive;
+    font-size: 50px;
+    font-style: normal;
+    padding-right: 5px;
+}
+/* signup styles */
+.signin-1{
+    display: flex;
+    justify-content: center;
+    height: 80%;
+    flex-direction: column;
+    align-items: center;
+    margin: 10em 0;
+}
+.social{
+    display: inline;
+    font-size: 3em;
+}
+.signin-1 input{
+    width: 60em;
+    height: 5em;
+    margin: 0.5em 0;
+    border-radius: 1em;
+}
+.second-abt{
+    display: flex;
+    margin:5em 0;
+ } 
+ .second-abt img{
+     height: 90%;
+     width: 50%;
+     border-radius: 3em;
+     margin: 0 2em;
+
+     
+}
+.second-abt h1{
+    font-size: 3em;
+}
+.second-abt p{
+    font-size: 2em;
+}
+
+.formr{
+    display: flex;
+    /* width: 51em; */
+    margin: 0 30em;
+}
+.form2 {
+    display: inline-block;
+    height: 3.5em;
+    border-radius: 0.8em;
+    margin: 0.5em 0;
+    width: 100%;
+    height: 3em;
+}
+#checkbox{
+    margin: 0;
+}
+.sign-up-choose{
+   padding: 1em 2.5em;
+   border-radius: 8px;
+   background-color: blue;
+   border-style: none;
+}
+
+/* .abt-img2{
+    background-image: url(./images\ 1.jpg) ;
+    height: 90%;
+    width: 50%;
+    background-position: center;
+    
+} */ 
